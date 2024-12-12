@@ -36,6 +36,9 @@ export class UserRegistrationService {
   }
 }
 
+@Injectable({
+  providedIn: 'root',
+})
 export class UserLoginService {
   constructor(private http: HttpClient) {}
 

@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: false, // ensure the dialog is not standalone
 })
 export class UserLoginFormComponent implements OnInit {
-  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
+  @Input() userData = { Username: '', Password: '' };
 
   constructor(
     public fetchApiData: UserLoginService,

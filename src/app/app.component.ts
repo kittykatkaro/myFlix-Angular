@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: false,
+  standalone: false, // ensure that the component is not treated as a standalone component
 })
 export class AppComponent {
   title = 'myFlix-Angular-client';

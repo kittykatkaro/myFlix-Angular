@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,6 +46,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     FormsModule,
+    MatIconModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

@@ -17,7 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   standalone: false, // ensure that the component is not treated as a standalone component
 })
 export class UserRegistrationFormComponent implements OnInit {
-  @Input() userData = { username: '', password: '', email: '', birthday: '' };
+  @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   constructor(
     public fetchApiData: UserRegistrationService,

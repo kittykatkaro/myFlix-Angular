@@ -94,7 +94,9 @@ export class GetAllMoviesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetOneMovieService {
   constructor(private http: HttpClient) {}
 
@@ -120,7 +122,9 @@ export class GetOneMovieService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetDirectorService {
   constructor(private http: HttpClient) {}
 
@@ -146,7 +150,9 @@ export class GetDirectorService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetGenreService {
   constructor(private http: HttpClient) {}
 
@@ -172,7 +178,9 @@ export class GetGenreService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetUserDataService {
   constructor(private http: HttpClient) {}
 
@@ -199,7 +207,9 @@ export class GetUserDataService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class EditUserService {
   constructor(private http: HttpClient) {}
 
@@ -226,7 +236,9 @@ export class EditUserService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class AddToFavoritesService {
   constructor(private http: HttpClient) {}
 
@@ -253,7 +265,9 @@ export class AddToFavoritesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class FavoriteMoviesList {
   constructor(private http: HttpClient) {}
 
@@ -280,7 +294,9 @@ export class FavoriteMoviesList {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class RemoveFromFavoritesService {
   constructor(private http: HttpClient) {}
 
@@ -307,7 +323,9 @@ export class RemoveFromFavoritesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class DeleteUserService {
   constructor(private http: HttpClient) {}
 

@@ -16,7 +16,8 @@ export class UserLoginFormComponent implements OnInit {
   constructor(
     public fetchApiData: UserLoginService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -39,5 +40,6 @@ export class UserLoginFormComponent implements OnInit {
         });
       }
     );
+    this.router.navigate(['movies']); //navigate to the movies route
   }
 }

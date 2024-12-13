@@ -1,5 +1,6 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'myFlix-Angular-client';
+
+  constructor(public router: Router) {}
+
+  logout(): void {
+    // clear local storage
+    localStorage.clear();
+
+    //redirect to welcome page
+    this.router.navigate(['welcome']);
+  }
 }

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   GetUserDataService,
   EditUserService,
   DeleteUserService,
+  GetOneMovieService,
+  GetAllMoviesService,
 } from '../fetch-api-data.service';
 
 @Component({
@@ -16,9 +18,11 @@ export class ProfileViewComponent implements OnInit {
   userData: any = {};
   editForm: FormGroup;
   isEditing: boolean = false;
+  favoriteMovies: any[] = []; // Store full movie details
 
   constructor(
     private getUserDataService: GetUserDataService,
+    private getAllMoviesService: GetAllMoviesService, // Inject service here
     private editUserService: EditUserService,
     private formBuilder: FormBuilder,
     private deleteUserService: DeleteUserService
@@ -32,13 +36,25 @@ export class ProfileViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getUserData();
+    // Fetch user data
+    this.getUserDataService.getUserData().subscribe((resp: any) => {
+      this.userData = resp;
+      console.log('User data:', this.userData); // Debug user data
+      // Once user data is loaded, fetch and filter favorite movies
+      this.loadFavoriteMovies();
+    });
   }
 
   getUserData(): void {
     this.getUserDataService.getUserData().subscribe((resp: any) => {
       this.userData = resp;
       console.log(this.userData);
+      console.log('FavoriteMovies (IDs):', this.userData.FavoriteMovies);
+
+      if (this.userData.FavoriteMovies?.length > 0) {
+        this.loadFavoriteMovies();
+      }
+
       this.editForm.patchValue({
         Username: this.userData.Username,
         Email: this.userData.Email,
@@ -94,6 +110,23 @@ export class ProfileViewComponent implements OnInit {
         window.location.href = '/login'; // Or use your routing mechanism
       },
       (err) => console.error('Error deleting profile', err)
+    );
+  }
+
+  // Fetch details for favorite movies
+  loadFavoriteMovies(): void {
+    this.getAllMoviesService.getAllMovies().subscribe(
+      (movies: any[]) => {
+        console.log('All movies:', movies); // Debug all movies fetched
+        // Filter movies based on user's favorite IDs
+        this.favoriteMovies = movies.filter((movie) =>
+          this.userData.FavoriteMovies.includes(movie._id)
+        );
+        console.log('Filtered favoriteMovies:', this.favoriteMovies); // Debug favorites
+      },
+      (err: any) => {
+        console.error('Error fetching all movies:', err); // Log errors
+      }
     );
   }
 }

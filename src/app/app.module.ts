@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     MatIconModule,
     ReactiveFormsModule,
     MatToolbarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [provideAnimationsAsync()],
   bootstrap: [AppComponent],

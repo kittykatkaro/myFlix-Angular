@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { GetAllMoviesService } from '../fetch-api-data.service';
+import {
+  AddToFavoritesService,
+  GetAllMoviesService,
+  GetUserDataService,
+  RemoveFromFavoritesService,
+} from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 
@@ -12,13 +17,19 @@ import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  favoriteMovies: string[] = []; // Store IDs of favorited movies
+
   constructor(
     public fetchApiData: GetAllMoviesService,
+    public getUserDataService: GetUserDataService,
+    public addToFavoritesService: AddToFavoritesService,
+    public removeFromFavoritesService: RemoveFromFavoritesService,
     public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.getMovies();
+    this.getFavoriteMovies(); // Fetch favorites on initialization
   }
 
   getMovies(): void {
@@ -39,12 +50,35 @@ export class MovieCardComponent {
     });
   }
 
-  // dummy function to add movie to favorites (to be linked)
-  toggleFavorite(movieId: string): void {
-    console.log('Added to favorites');
+  // Fetch the user's favorite movies
+  getFavoriteMovies(): void {
+    this.getUserDataService.getUserData().subscribe((resp: any) => {
+      this.favoriteMovies = resp.FavoriteMovies || [];
+      console.log('Favorite Movies:', this.favoriteMovies);
+    });
   }
-  //check if movie is in favorites (to be linked)#
-  isFavorite(movieId: string): boolean {
-    return false;
+
+  // Check if a movie is in the favorites list
+  isFavorite(movie: any): boolean {
+    return this.favoriteMovies.includes(movie._id);
+  }
+
+  // Add or remove a movie from favorites
+  toggleFavorite(movie: any): void {
+    if (this.isFavorite(movie)) {
+      this.removeFromFavoritesService
+        .removeFromFavorites(movie._id)
+        .subscribe(() => {
+          console.log(`${movie.Title} removed from favorites.`);
+          this.favoriteMovies = this.favoriteMovies.filter(
+            (id) => id !== movie._id
+          ); // Update UI
+        });
+    } else {
+      this.addToFavoritesService.addToFavorites(movie._id).subscribe(() => {
+        console.log(`${movie.Title} added to favorites.`);
+        this.favoriteMovies.push(movie._id); // Update UI
+      });
+    }
   }
 }

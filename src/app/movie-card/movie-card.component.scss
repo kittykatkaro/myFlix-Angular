@@ -54,6 +54,15 @@ mat-card-actions mat-icon {
   color: #f44336; /* Color for the favorite icon */
 }
 
+mat-icon {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+mat-icon.favorited {
+  color: red;
+}
+
 @media (max-width: 768px) {
   .movie-grid {
     grid-template-columns: repeat(

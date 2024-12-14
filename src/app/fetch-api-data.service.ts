@@ -71,9 +71,9 @@ export class GetAllMoviesService {
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'movies', {
+      .get<any[]>(`${apiUrl}movies`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -101,16 +101,17 @@ export class GetOneMovieService {
   constructor(private http: HttpClient) {}
 
   //Api call to get one movie
-  public getOneMovie(): Observable<any> {
+  public getOneMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'movies/:Title', {
+      .get(`${apiUrl}movies/${movieId}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         }),
       })
       .pipe(catchError(this.handleError));
   }
+
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);

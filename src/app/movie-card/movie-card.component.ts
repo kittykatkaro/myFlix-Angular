@@ -6,12 +6,12 @@ import {
   RemoveFromFavoritesService,
 } from '../fetch-api-data.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 
 @Component({
   selector: 'app-movie-card',
   standalone: false,
-
   templateUrl: './movie-card.component.html',
   styleUrl: './movie-card.component.scss',
 })
@@ -24,7 +24,8 @@ export class MovieCardComponent {
     public getUserDataService: GetUserDataService,
     public addToFavoritesService: AddToFavoritesService,
     public removeFromFavoritesService: RemoveFromFavoritesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar // Inject MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -36,21 +37,18 @@ export class MovieCardComponent {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
       console.log(this.movies);
-      // return this.movies;
     });
   }
 
-  // Function to open the dialog when the movie image is clicked
   openDialog(type: string, data: any): void {
-    console.log('Dialog Type:', type); // Debugging: Check the type
-    console.log('Dialog Data:', data); // Debugging: Check the data being passed
+    console.log('Dialog Type:', type);
+    console.log('Dialog Data:', data);
     this.dialog.open(MovieDialogComponent, {
       data: { type, data },
       width: '400px',
     });
   }
 
-  // Fetch the user's favorite movies
   getFavoriteMovies(): void {
     this.getUserDataService.getUserData().subscribe((resp: any) => {
       this.favoriteMovies = resp.FavoriteMovies || [];
@@ -58,27 +56,57 @@ export class MovieCardComponent {
     });
   }
 
-  // Check if a movie is in the favorites list
   isFavorite(movie: any): boolean {
     return this.favoriteMovies.includes(movie._id);
   }
 
-  // Add or remove a movie from favorites
   toggleFavorite(movie: any): void {
     if (this.isFavorite(movie)) {
-      this.removeFromFavoritesService
-        .removeFromFavorites(movie._id)
-        .subscribe(() => {
+      // Remove from favorites
+      this.removeFromFavoritesService.removeFromFavorites(movie._id).subscribe(
+        () => {
           console.log(`${movie.Title} removed from favorites.`);
           this.favoriteMovies = this.favoriteMovies.filter(
             (id) => id !== movie._id
           ); // Update UI
-        });
+          // Show a snackbar notification
+          this.snackBar.open(`${movie.Title} removed from favorites.`, 'OK', {
+            duration: 3000,
+          });
+        },
+        (error) => {
+          console.error(`Error removing ${movie.Title} from favorites:`, error);
+          this.snackBar.open(
+            `Could not remove ${movie.Title} from favorites.`,
+            'OK',
+            {
+              duration: 3000,
+            }
+          );
+        }
+      );
     } else {
-      this.addToFavoritesService.addToFavorites(movie._id).subscribe(() => {
-        console.log(`${movie.Title} added to favorites.`);
-        this.favoriteMovies.push(movie._id); // Update UI
-      });
+      // Add to favorites
+      this.addToFavoritesService.addToFavorites(movie._id).subscribe(
+        () => {
+          console.log(`${movie.Title} added to favorites.`);
+          this.favoriteMovies.push(movie._id); // Update UI
+          // Show a snackbar notification
+          this.snackBar.open(`${movie.Title} added to favorites.`, 'OK', {
+            duration: 3000,
+          });
+        },
+        (error) => {
+          console.error(`Error adding ${movie.Title} to favorites:`, error);
+          this.snackBar.open(
+            `Could not add ${movie.Title} to favorites.`,
+            'OK',
+            {
+              duration: 3000,
+            }
+          );
+        }
+      );
     }
   }
 }

@@ -33,3 +33,21 @@
         </button>
     </form>
 </div>
+
+<div class="favorite-movies-section" *ngIf="favoriteMovies.length > 0">
+    <h2>Your Favorite Movies</h2>
+
+    <!-- Movies Grid -->
+    <div class="movies-grid">
+        <mat-card *ngFor="let movie of favoriteMovies" class="movie-card">
+            <img [src]="movie.ImageUrl || 'https://via.placeholder.com/300x400?text=No+Image'" alt="{{ movie.Title }}"
+                class="movie-image" />
+            <mat-card-title>{{ movie.Title }}</mat-card-title>
+        </mat-card>
+    </div>
+</div>
+
+<!-- Fallback if no favorites are present -->
+<div *ngIf="favoriteMovies.length === 0">
+    <h3>You don't have any favorite movies yet!</h3>
+</div>

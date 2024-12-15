@@ -59,6 +59,10 @@
                 <button mat-button color="primary" (click)="openDialog('synopsis', movie)">
                     Synopsis
                 </button>
+                <!-- Favorite toggle button -->
+                <mat-icon (click)="removeFavorite(movie)" class="favorited">
+                    favorite
+                </mat-icon>
             </mat-card-actions>
         </mat-card>
     </div>

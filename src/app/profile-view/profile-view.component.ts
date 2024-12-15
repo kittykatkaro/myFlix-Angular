@@ -6,9 +6,11 @@ import {
   DeleteUserService,
   GetOneMovieService,
   GetAllMoviesService,
+  RemoveFromFavoritesService,
 } from '../fetch-api-data.service';
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile-view',
@@ -29,7 +31,9 @@ export class ProfileViewComponent implements OnInit {
     private editUserService: EditUserService,
     private formBuilder: FormBuilder,
     private deleteUserService: DeleteUserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public removeFromFavoritesService: RemoveFromFavoritesService,
+    private snackBar: MatSnackBar
   ) {
     this.editForm = this.formBuilder.group({
       Username: [''],
@@ -132,6 +136,7 @@ export class ProfileViewComponent implements OnInit {
     );
   }
 
+  // Open movie dialog with data
   openDialog(type: string, data: any): void {
     console.log('Dialog Type:', type);
     console.log('Dialog Data:', data);
@@ -139,5 +144,27 @@ export class ProfileViewComponent implements OnInit {
       data: { type, data },
       width: '400px',
     });
+  }
+
+  removeFavorite(movie: any): void {
+    this.removeFromFavoritesService.removeFromFavorites(movie._id).subscribe(
+      () => {
+        console.log(`${movie.Title} removed from favorites.`);
+        this.favoriteMovies = this.favoriteMovies.filter(
+          (favMovie) => favMovie._id !== movie._id
+        ); // Correctly update the UI
+        this.snackBar.open(`${movie.Title} removed from favorites.`, 'OK', {
+          duration: 3000,
+        });
+      },
+      (error) => {
+        console.error(`Error removing ${movie.Title} from favorites:`, error);
+        this.snackBar.open(
+          `Could not remove ${movie.Title} from favorites.`,
+          'OK',
+          { duration: 3000 }
+        );
+      }
+    );
   }
 }

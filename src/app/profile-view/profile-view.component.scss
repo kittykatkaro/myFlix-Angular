@@ -134,8 +134,28 @@ button {
       margin: 10px 0;
     }
   }
-}
 
+  mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #fafafa;
+  }
+
+  mat-card-actions mat-icon {
+    font-size: 1.5em;
+    color: #f44336; /* Color for the favorite icon */
+  }
+
+  mat-icon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  mat-icon.favorited {
+    color: red;
+  }
+}
 .loading-indicator {
   display: flex;
   flex-direction: column;

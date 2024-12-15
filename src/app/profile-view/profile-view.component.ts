@@ -7,6 +7,8 @@ import {
   GetOneMovieService,
   GetAllMoviesService,
 } from '../fetch-api-data.service';
+import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile-view',
@@ -26,7 +28,8 @@ export class ProfileViewComponent implements OnInit {
     private getAllMoviesService: GetAllMoviesService,
     private editUserService: EditUserService,
     private formBuilder: FormBuilder,
-    private deleteUserService: DeleteUserService
+    private deleteUserService: DeleteUserService,
+    public dialog: MatDialog
   ) {
     this.editForm = this.formBuilder.group({
       Username: [''],
@@ -127,5 +130,14 @@ export class ProfileViewComponent implements OnInit {
         this.isLoading = false; // Ensure loading state is false on error
       }
     );
+  }
+
+  openDialog(type: string, data: any): void {
+    console.log('Dialog Type:', type);
+    console.log('Dialog Data:', data);
+    this.dialog.open(MovieDialogComponent, {
+      data: { type, data },
+      width: '400px',
+    });
   }
 }

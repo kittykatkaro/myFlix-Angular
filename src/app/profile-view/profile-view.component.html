@@ -49,6 +49,17 @@
             <img [src]="movie.ImageUrl || 'https://via.placeholder.com/300x400?text=No+Image'" alt="{{ movie.Title }}"
                 class="movie-image" />
             <mat-card-title>{{ movie.Title }}</mat-card-title>
+            <mat-card-actions>
+                <button mat-button color="primary" (click)="openDialog('genre', movie.Genre)">
+                    Genre
+                </button>
+                <button mat-button color="primary" (click)="openDialog('director', movie.Director)">
+                    Director
+                </button>
+                <button mat-button color="primary" (click)="openDialog('synopsis', movie)">
+                    Synopsis
+                </button>
+            </mat-card-actions>
         </mat-card>
     </div>
 

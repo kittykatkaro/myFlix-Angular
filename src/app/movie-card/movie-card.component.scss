@@ -23,18 +23,18 @@
 }
 
 mat-card-header {
+  display: flex;
   background-color: #f1f1f1;
   padding: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 mat-card-title {
   font-size: 1.2em;
   font-weight: bold;
-}
-
-mat-card-subtitle {
-  font-size: 0.9em;
-  color: #777;
 }
 
 mat-card-actions {

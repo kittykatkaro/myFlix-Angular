@@ -1,0 +1,73 @@
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Adjusts column width and makes it responsive */
+  gap: 20px; /* Spacing between cards */
+  margin: 10px;
+}
+
+.movie-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Ensures that content doesn't overflow */
+}
+
+.movie-card img {
+  width: 100%; /* Makes the image fill the width of the card */
+  height: auto; /* Maintains aspect ratio */
+}
+
+mat-card-header {
+  display: flex;
+  background-color: #f1f1f1;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+mat-card-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fafafa;
+}
+
+mat-card-actions button {
+  font-size: 0.9em;
+  padding: 5px 10px;
+}
+
+mat-card-actions mat-icon {
+  font-size: 1.5em;
+  color: #f44336; /* Color for the favorite icon */
+}
+
+mat-icon {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+mat-icon.favorited {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .movie-grid {
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(200px, 1fr)
+    ); /* Adjust column layout for smaller screens */
+  }
+}

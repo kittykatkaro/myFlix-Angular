@@ -1,0 +1,18 @@
+.main-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh; // Upper half of the screen
+  margin-top: 25vh; // Center vertically in the upper half
+
+  h1 {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 10px; // Spacing between buttons
+  }
+}

@@ -1,0 +1,19 @@
+mat-card-header {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+mat-form-field {
+  width: 100%;
+}
+button {
+  width: 100%;
+}

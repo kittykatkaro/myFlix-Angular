@@ -61,6 +61,9 @@ export class UserLoginService {
   }
 }
 
+@Injectable({
+  providedIn: 'root',
+})
 export class GetAllMoviesService {
   constructor(private http: HttpClient) {}
 
@@ -68,9 +71,9 @@ export class GetAllMoviesService {
   public getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'movies', {
+      .get<any[]>(`${apiUrl}movies`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         }),
       })
       .pipe(map(this.extractResponseData), catchError(this.handleError));
@@ -91,21 +94,24 @@ export class GetAllMoviesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetOneMovieService {
   constructor(private http: HttpClient) {}
 
   //Api call to get one movie
-  public getOneMovie(): Observable<any> {
+  public getOneMovie(movieId: string): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http
-      .get(apiUrl + 'movies/:Title', {
+      .get(`${apiUrl}movies/${movieId}`, {
         headers: new HttpHeaders({
-          Authorization: 'Bearer ' + token,
+          Authorization: `Bearer ${token}`,
         }),
       })
       .pipe(catchError(this.handleError));
   }
+
   private handleError(error: HttpErrorResponse): any {
     if (error.error instanceof ErrorEvent) {
       console.error('Some error occurred:', error.error.message);
@@ -117,7 +123,9 @@ export class GetOneMovieService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetDirectorService {
   constructor(private http: HttpClient) {}
 
@@ -143,7 +151,9 @@ export class GetDirectorService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetGenreService {
   constructor(private http: HttpClient) {}
 
@@ -169,7 +179,9 @@ export class GetGenreService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class GetUserDataService {
   constructor(private http: HttpClient) {}
 
@@ -196,7 +208,9 @@ export class GetUserDataService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class EditUserService {
   constructor(private http: HttpClient) {}
 
@@ -223,7 +237,9 @@ export class EditUserService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class AddToFavoritesService {
   constructor(private http: HttpClient) {}
 
@@ -250,7 +266,9 @@ export class AddToFavoritesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class FavoriteMoviesList {
   constructor(private http: HttpClient) {}
 
@@ -277,7 +295,9 @@ export class FavoriteMoviesList {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class RemoveFromFavoritesService {
   constructor(private http: HttpClient) {}
 
@@ -304,7 +324,9 @@ export class RemoveFromFavoritesService {
     return throwError('Something bad happened; please try again later.');
   }
 }
-
+@Injectable({
+  providedIn: 'root',
+})
 export class DeleteUserService {
   constructor(private http: HttpClient) {}
 

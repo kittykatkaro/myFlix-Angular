@@ -1,0 +1,27 @@
+mat-toolbar {
+  background-color: #d32f2f; /* Custom red color */
+  color: #ffffff; /* White text */
+  display: flex;
+  justify-content: space-between;
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+
+  button {
+    margin: 0 8px;
+    color: #ffffff; /* Ensure buttons have white text */
+  }
+
+  a {
+    color: #ffffff; /* Ensure links have white text */
+    text-decoration: none;
+  }
+}
+
+.mat-snack-bar-container {
+  background-color: #323232; /* Dark background */
+  color: #ffffff; /* White text */
+  font-size: 16px;
+  text-align: center;
+}

@@ -1,59 +1,62 @@
-# MyFlixAngular
+# myFlix-Angular
+
+myFlix-Angular is a responsive, single-page web application built with Angular. It serves as the client-side interface for the existing server-side API of the myFlix app, enabling users to explore a rich catalog of movies, directors, and genres. Users can create an account, log in, and curate their favorite movie list.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
 
-## Development server
 
-To start a local development server, run:
+## Table of Contents
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Usage](#usage)
+- [Key Views](#key-views)
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Features
 
-## Code scaffolding
+- **User Authentication:** Register and log in to access personalized features.
+- **Movie Catalog:** Browse and search through a wide selection of movies.
+- **Detailed Views:** View detailed information about individual movies, directors, and genres.
+- **Favorites Management:** Add and remove movies from your favorites list.
+- **Responsive Design:** Optimized for mobile, tablet, and desktop devices.
+- **User-Centric Interface:** Built with Angular Material for a sleek and modern design.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Technologies Used
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Frontend Framework:** Angular (v9+)
+- **UI Library:** Angular Material
+- **Backend Integration:** REST API (existing myFlix server-side)
+- **Build Tools:** Angular CLI, Node.js, npm
+- **Hosting:** GitHub Pages
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Usage
 
-To build the project run:
+- **Welcome View:**
+New users can register an account.
+Existing users can log in.
 
-```bash
-ng build
-```
+- **Main Movie View:**
+Browse all available movies.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **Movie Details View:**
+Access additional details about a selected movie, including:
+Movie description.
+Director details.
+Genre information.
 
-## Running unit tests
+- **Favorites List:**
+Save movies to your favorites for quick access.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
+## Key Views
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Welcome View:** User authentication (register and log in).
+- **Movie Card View:** Browse movie catalog.
+- **Movie Details Dialog:** Detailed information on movies, directors, and genres.
+- **User Profile:** Manage account information and view favorites.

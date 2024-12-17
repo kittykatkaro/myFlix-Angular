@@ -9,6 +9,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 import { MovieDialogComponent } from '../movie-dialog/movie-dialog.component';
 
+/**
+ * Component for the movie card, which displays movie details.
+ * It fetches all movies from the database and displays them in cards.
+ * It also allows users to add and remove movies from their favorites.
+ * It opens the movie dialog when a movie card is clicked.
+ */
 @Component({
   selector: 'app-movie-card',
   standalone: false,
@@ -33,6 +39,10 @@ export class MovieCardComponent {
     this.getFavoriteMovies(); // Fetch favorites on initialization
   }
 
+  /**
+   * Fetches all movies from the database.
+   * @returns {void} Movies array
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -40,6 +50,11 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Opens the movie dialog with the movie details.
+   * @param {string} type - The type of dialog to open
+   * @param {any} data - The data to pass to the dialog
+   */
   openDialog(type: string, data: any): void {
     console.log('Dialog Type:', type);
     console.log('Dialog Data:', data);
@@ -49,6 +64,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Fetches the user's favorite movies from the database.
+   * @returns {void} Favorite movies array
+   */
   getFavoriteMovies(): void {
     this.getUserDataService.getUserData().subscribe((resp: any) => {
       this.favoriteMovies = resp.FavoriteMovies || [];
@@ -56,10 +75,23 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Checks if a movie is in the user's favorites.
+   * @param {any} movie - The movie to check
+   * @returns {boolean} Whether the movie is in favorites
+   */
   isFavorite(movie: any): boolean {
     return this.favoriteMovies.includes(movie._id);
   }
 
+  /**
+   * Toggles a movie's favorite status.
+   * If the movie is already a favorite, it is removed.
+   * If the movie is not a favorite, it is added.
+   * @param {any} movie - The movie to toggle
+   * @returns {void} Updates the favoriteMovies array
+   * @returns {void} Shows a snackbar notification
+   */
   toggleFavorite(movie: any): void {
     if (this.isFavorite(movie)) {
       // Remove from favorites

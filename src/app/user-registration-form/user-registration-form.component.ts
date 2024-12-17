@@ -10,6 +10,11 @@ import { Router } from '@angular/router'; // Import Router for redirection
   styleUrl: './user-registration-form.component.scss',
   standalone: false,
 })
+
+/**
+ * Component for the user registration form.
+ * It provides a form for the user to enter their username, password, email, and birthday.
+ */
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
@@ -22,7 +27,13 @@ export class UserRegistrationFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // This function is responsible for sending the form inputs to the backend
+  /**
+   * Registers a new user by calling the userRegistration method from fetchApiData service.
+   * On successful registration, it closes the dialog, shows a success message, and navigates to the welcome page.
+   * If registration fails, it shows an error message.
+   *
+   * @returns {void}
+   */
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (result: any) => {
@@ -30,12 +41,16 @@ export class UserRegistrationFormComponent implements OnInit {
         this.dialogRef.close();
 
         // Show a success message
-        this.snackBar.open('User registration successful!', 'OK', {
-          duration: 2000,
-        });
+        this.snackBar.open(
+          'User registration successful! Please log in.',
+          'OK',
+          {
+            duration: 2000,
+          }
+        );
 
-        // Navigate to the movies page
-        this.router.navigate(['movies']);
+        // Navigate to the login page
+        this.router.navigate(['welcome']);
       },
       (error: any) => {
         // Show an error message if registration fails

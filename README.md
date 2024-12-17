@@ -1,3 +1,4 @@
+
 # myFlix Angular App
 
 This repository contains the **myFlix Angular App**, a client-side application built with Angular to provide users with a visually appealing and responsive interface for browsing movies. It consumes a RESTful API to fetch and display movie data, allowing users to manage their movie favorites and view details about movies, directors, and genres.

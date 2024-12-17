@@ -30,12 +30,16 @@ export class UserRegistrationFormComponent implements OnInit {
         this.dialogRef.close();
 
         // Show a success message
-        this.snackBar.open('User registration successful!', 'OK', {
-          duration: 2000,
-        });
+        this.snackBar.open(
+          'User registration successful! Please log in.',
+          'OK',
+          {
+            duration: 2000,
+          }
+        );
 
-        // Navigate to the movies page
-        this.router.navigate(['movies']);
+        // Navigate to the login page
+        this.router.navigate(['welcome']);
       },
       (error: any) => {
         // Show an error message if registration fails

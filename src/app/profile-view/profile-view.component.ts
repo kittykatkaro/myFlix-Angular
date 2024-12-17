@@ -4,7 +4,6 @@ import {
   GetUserDataService,
   EditUserService,
   DeleteUserService,
-  GetOneMovieService,
   GetAllMoviesService,
   RemoveFromFavoritesService,
 } from '../fetch-api-data.service';
@@ -18,6 +17,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './profile-view.component.html',
   styleUrls: ['./profile-view.component.scss'],
 })
+
+/**
+ * Component for the user profile view.
+ * It provides methods to fetch, edit, and delete user data.
+ * It also fetches and displays favorite movies.
+ */
 export class ProfileViewComponent implements OnInit {
   userData: any = {};
   editForm: FormGroup;
@@ -44,20 +49,22 @@ export class ProfileViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Fetch user data
     this.getUserDataService.getUserData().subscribe((resp: any) => {
       this.userData = resp;
-      console.log('User data:', this.userData); // Debug user data
+      // console.log('User data:', this.userData); // Debug user data
       // Once user data is loaded, fetch and filter favorite movies
       this.loadFavoriteMovies();
     });
   }
 
+  /**
+   * Fetches user data and favorite movies.
+   */
   getUserData(): void {
     this.getUserDataService.getUserData().subscribe((resp: any) => {
       this.userData = resp;
-      console.log(this.userData);
-      console.log('FavoriteMovies (IDs):', this.userData.FavoriteMovies);
+      // console.log(this.userData);
+      // console.log('FavoriteMovies (IDs):', this.userData.FavoriteMovies);
 
       if (this.userData.FavoriteMovies?.length > 0) {
         this.loadFavoriteMovies();
@@ -73,22 +80,31 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Enables editing of user data.
+   */
   enableEdit(): void {
     this.isEditing = true;
   }
 
+  /**
+   * Saves changes to user data.
+   */
   saveChanges(): void {
     if (this.editForm.valid) {
       this.editUserService
         .editUser(this.editForm.value)
         .subscribe((resp: any) => {
-          console.log(resp);
+          // console.log(resp);
           this.isEditing = false;
           this.getUserData();
         });
     }
   }
 
+  /**
+   * Cancels editing of user data.
+   */
   cancelEdit(): void {
     this.isEditing = false;
     this.editForm.patchValue({
@@ -98,6 +114,11 @@ export class ProfileViewComponent implements OnInit {
     });
   }
 
+  /**
+   * Confirms and deletes the user profile.
+   * If confirmed, the deleteProfile method is called.
+   * If canceled, the dialog is closed.
+   */
   confirmDelete(): void {
     const confirmDelete = confirm(
       'Are you sure you want to delete your profile? This action is irreversible.'
@@ -107,6 +128,10 @@ export class ProfileViewComponent implements OnInit {
     }
   }
 
+  /**
+   * Deletes the user profile.
+   * On success, the user is logged out and redirected to the login or home page.
+   */
   deleteProfile(): void {
     this.deleteUserService.deleteUser().subscribe(
       () => {
@@ -114,42 +139,54 @@ export class ProfileViewComponent implements OnInit {
         localStorage.removeItem('user');
         alert('Your profile has been deleted.');
         window.location.href = '/login'; // Redirect to login or home page
-      },
-      (err) => console.error('Error deleting profile', err)
+      }
+      // (err) => console.error('Error deleting profile', err)
     );
   }
 
+  /**
+   * Fetches and filters favorite movies.
+   * The favoriteMovies array is populated with full movie details.
+   */
   loadFavoriteMovies(): void {
     this.getAllMoviesService.getAllMovies().subscribe(
       (movies: any[]) => {
-        console.log('All movies:', movies); // Debug all movies fetched
+        // console.log('All movies:', movies); // Debug all movies fetched
         this.favoriteMovies = movies.filter((movie) =>
           this.userData.FavoriteMovies.includes(movie._id)
         );
-        console.log('Filtered favoriteMovies:', this.favoriteMovies); // Debug favorites
+        // console.log('Filtered favoriteMovies:', this.favoriteMovies); // Debug favorites
         this.isLoading = false; // Loading complete
       },
       (err: any) => {
-        console.error('Error fetching all movies:', err);
+        // console.error('Error fetching all movies:', err);
         this.isLoading = false; // Ensure loading state is false on error
       }
     );
   }
 
-  // Open movie dialog with data
+  /**
+   * Opens a dialog for a movie, which displays movie details.
+   * @param type - The type of dialog to open.
+   * @param data - The movie data to display in the dialog.
+   */
   openDialog(type: string, data: any): void {
-    console.log('Dialog Type:', type);
-    console.log('Dialog Data:', data);
+    // console.log('Dialog Type:', type);
+    // console.log('Dialog Data:', data);
     this.dialog.open(MovieDialogComponent, {
       data: { type, data },
       width: '400px',
     });
   }
 
+  /**
+   * Removes a movie from favorites.
+   * @param movie - The movie to remove.
+   */
   removeFavorite(movie: any): void {
     this.removeFromFavoritesService.removeFromFavorites(movie._id).subscribe(
       () => {
-        console.log(`${movie.Title} removed from favorites.`);
+        // console.log(`${movie.Title} removed from favorites.`);
         this.favoriteMovies = this.favoriteMovies.filter(
           (favMovie) => favMovie._id !== movie._id
         ); // Correctly update the UI
@@ -158,7 +195,7 @@ export class ProfileViewComponent implements OnInit {
         });
       },
       (error) => {
-        console.error(`Error removing ${movie.Title} from favorites:`, error);
+        // console.error(`Error removing ${movie.Title} from favorites:`, error);
         this.snackBar.open(
           `Could not remove ${movie.Title} from favorites.`,
           'OK',

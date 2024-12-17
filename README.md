@@ -1,59 +1,96 @@
-# MyFlixAngular
+# myFlix Angular App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
+This repository contains the **myFlix Angular App**, a client-side application built with Angular to provide users with a visually appealing and responsive interface for browsing movies. It consumes a RESTful API to fetch and display movie data, allowing users to manage their movie favorites and view details about movies, directors, and genres.
 
-## Development server
+---
 
-To start a local development server, run:
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Setup and Installation](#setup-and-installation)
+5. [Usage](#usage)
+6. [License](#license)
+7. [Author](#author)
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Project Overview
+The **myFlix Angular App** allows users to access a movie database with features such as:
+- Viewing a list of movies with details.
+- Exploring information about movie directors and genres.
+- Adding or removing movies to/from their favorites list.
+- Updating their user profile information.
 
-## Code scaffolding
+This application is built using Angular, a robust front-end framework, and integrates with the **myFlix API** backend.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Features
+- **Movie List**: Browse a catalog of movies fetched from the API.
+- **Movie Details**: View information about individual movies, including synopsis, genre, and director.
+- **Favorite Movies**: Add or remove movies from your list of favorites.
+- **User Management**: Register, log in, and update user information.
+- **Responsive Design**: Optimized for all devices (mobile, tablet, and desktop).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## Technologies Used
+- **Angular 6.5** - Component-based front-end framework.
+- **Angular Material** - UI components for a modern and polished design.
+- **TypeScript** - For type-safe JavaScript development.
+- **RxJS** - Reactive programming for handling asynchronous data streams.
+- **Bootstrap** - Styling and responsive layout.
+- **myFlix API** - RESTful backend API providing movie data.
 
-## Building
+---
 
-To build the project run:
+## Setup and Installation
+Follow these steps to run the myFlix Angular App locally:
 
-```bash
-ng build
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/kittykatkaro/myFlix-Angular.git
+   cd myFlix-Angular
+   ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. **Checkout the correct branch**:
+   ```bash
+   git checkout 6.5
+   ```
 
-## Running unit tests
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+4. **Run the application**:
+   ```bash
+   ng serve
+   ```
+   The app will be available at `http://localhost:4200/`.
 
-```bash
-ng test
-```
+---
 
-## Running end-to-end tests
+## Usage
+- Open the app in a browser at `http://localhost:4200/`.
+- Register or log in to access movie details and favorite list functionality.
+- Browse through the list of movies and click on any movie to see its details.
+- Use the "Add to Favorites" button to add movies to your favorites list.
+- Update your user profile via the settings menu.
 
-For end-to-end (e2e) testing, run:
+---
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## License
+This project is licensed under the **MIT License**.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Author
+**Kittykatkaro**  
+[GitHub Profile](https://github.com/kittykatkaro)  
+
+---
+
+Thank you for checking out the myFlix Angular App! 🎥✨
